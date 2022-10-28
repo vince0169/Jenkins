@@ -4,7 +4,10 @@ pipeline {
        IMAGE_TAG = "latest"
        STAGING = "vincent-staticwebsite-staging"
        PRODUCTION = "vincent-staticwebsite-production"
+       DOCKERHUB_ID = "vince0169"
+       DOCKERHUB_PASSWORD = credentials('dockerhub_password')
      }
+     
      agent none
      stages {
          stage('Build image') {
@@ -52,6 +55,19 @@ pipeline {
              }
           }
      }
+          
+     stage ('Login and Push Image on docker hub') {
+         agent any
+         steps {
+             script {
+               sh '''
+                   echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_ID --password-stdin
+                   docker push ${DOCKERHUB_ID}/$IMAGE_NAME:$IMAGE_TAG
+               '''
+             }
+          }
+      }     
+          
      stage('Push image in staging and deploy it') {
        when {
               expression { GIT_BRANCH == 'origin/main' }
@@ -63,8 +79,6 @@ pipeline {
       steps {
           script {
             sh '''
-              apk --no-cache add npm
-              npm install -g heroku
               heroku container:login
               heroku create $STAGING || echo "project already exist"
               heroku container:push -a $STAGING web
@@ -84,8 +98,6 @@ pipeline {
       steps {
           script {
             sh '''
-              apk --no-cache add npm
-              npm install -g heroku
               heroku container:login
               heroku create $PRODUCTION || echo "project already exist"
               heroku container:push -a $PRODUCTION web
