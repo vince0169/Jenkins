@@ -1,4 +1,4 @@
-pipeline {
+lpipeline {
      environment {
        IMAGE_NAME = "staticwebsite"
        IMAGE_TAG = "latest"
@@ -11,7 +11,11 @@ pipeline {
              agent any
              steps {
                 script {
-                  sh 'docker build -t vince0169/$IMAGE_NAME:$IMAGE_TAG . -f Jenkins/Mini-projet/Dockerfile'
+                  sh '''
+                  pwd
+                  ls
+                  docker build -t vince0169/$IMAGE_NAME:$IMAGE_TAG . -f Jenkins/Mini-projet/Dockerfile
+                  '''
                 }
              }
         }
