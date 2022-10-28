@@ -11,7 +11,7 @@ pipeline {
              agent any
              steps {
                 script {
-                  sh 'docker build -t vincent/$IMAGE_NAME:$IMAGE_TAG . -f Jenkins/Mini-projet/Dockerfile'
+                  sh 'docker build -t vincent/$IMAGE_NAME:$IMAGE_TAG .'
                 }
              }
         }
