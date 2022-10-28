@@ -1,4 +1,4 @@
-lpipeline {
+pipeline {
      environment {
        IMAGE_NAME = "staticwebsite"
        IMAGE_TAG = "latest"
