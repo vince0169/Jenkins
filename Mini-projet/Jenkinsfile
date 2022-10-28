@@ -15,7 +15,7 @@ pipeline {
                   pwd
                   cd Mini-projet
                   ls
-                  docker build -t vince0169/$IMAGE_NAME:$IMAGE_TAG . -f Jenkins/Mini-projet/Dockerfile
+                  docker build -t vince0169/$IMAGE_NAME:$IMAGE_TAG .
                   '''
                 }
              }
