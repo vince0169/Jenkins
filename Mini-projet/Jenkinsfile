@@ -18,7 +18,12 @@ pipeline {
            agent any
            steps {
               script {
-                sh 'docker build -t ${DOCKERHUB_ID}/$IMAGE_NAME:$IMAGE_TAG .'
+		sh '''
+                pwd
+		ls
+		cd Mini-projet
+                docker build -t ${DOCKERHUB_ID}/$IMAGE_NAME:$IMAGE_TAG .
+		'''
               }
            }
        }
