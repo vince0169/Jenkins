@@ -81,6 +81,7 @@ pipeline {
       steps {
           script {
             sh '''
+              cd TP6
               heroku container:login
               heroku create $PRODUCTION || echo "project already exist"
               heroku container:push -a $PRODUCTION web
