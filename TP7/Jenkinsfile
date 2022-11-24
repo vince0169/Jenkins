@@ -13,7 +13,7 @@ pipeline {
                 script {
                   sh '''
                     cd TP7
-                    docker build --no-cache -f ${DOCKERFILE_NAME} -t vince0169/$IMAGE_NAME:$IMAGE_TAG .
+                    docker build -t vince0169/$IMAGE_NAME:$IMAGE_TAG .
                   '''
                 }
              }
